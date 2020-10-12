@@ -7,7 +7,7 @@ class Modal extends Component {
     // Performance fix, to not uneccessarily render the modal and its components
     shouldComponentUpdate(nextProps, nextState){
         // only update when showing or hiding the modal
-        return nextProps.show !== this.props.show;
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
 
     componentWillUpdate() {
