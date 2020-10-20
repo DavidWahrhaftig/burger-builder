@@ -33,10 +33,10 @@ export const initIngredients = () => {
     return dispatch => {
         axiosOrders.get('https://react-burger-builder-7d7ed.firebaseio.com/ingredients.json')
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 dispatch(setIngredients(res.data));
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
                 // this.setState({error: true})
                 dispatch(fetchIngredientsFailed())
             })
