@@ -1,42 +1,43 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Auxiliary from '../Auxiliary/Auxiliary';
 import classes from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import {connect} from 'react-redux';
 
-class Layout extends Component {
-    state = {
-        showSideDrawer: false
+const Layout = props => {
+
+    const [showSideDrawer, setShowSideDrawer] = useState(false);
+
+    const closeSideDrawer = () => {
+        // this.setState({
+        //     showSideDrawer: false
+        // })
+        setShowSideDrawer(false);
     }
 
-    closeSideDrawer = () => {
-        this.setState({
-            showSideDrawer: false
-        })
+    const toggleSideDrawer = () => {
+        // this.setState( ( prevState ) => {
+        //     return {showSideDrawer: !prevState.SideDrawer}
+        // });
+
+        setShowSideDrawer(!showSideDrawer);
     }
 
-    toggleSideDrawer = () => {
-        this.setState( ( prevState ) => {
-            return {showSideDrawer: !prevState.SideDrawer}
-        });
-    }
-    render() {
-        return (
-            <Auxiliary>
-                <Toolbar 
-                    toggleSideDrawer={this.toggleSideDrawer} 
-                    isAuthenticated={this.props.isAuthenticated}
-                />
-                <SideDrawer 
-                    show={this.state.showSideDrawer} 
-                    close={this.closeSideDrawer}
-                    isAuthenticated={this.props.isAuthenticated}
-                />
-                <main className={classes.Content}>{this.props.children}</main>
-            </Auxiliary>
-        );
-    }
+    return (
+        <Auxiliary>
+            <Toolbar 
+                toggleSideDrawer={toggleSideDrawer} 
+                isAuthenticated={props.isAuthenticated}
+            />
+            <SideDrawer 
+                show={showSideDrawer} 
+                close={closeSideDrawer}
+                isAuthenticated={props.isAuthenticated}
+            />
+            <main className={classes.Content}>{props.children}</main>
+        </Auxiliary>
+    );
 }
 
 const mapStateToProps = state => {
